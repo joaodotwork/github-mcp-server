@@ -55,9 +55,9 @@ func (s stubDeps) GetRawClient(ctx context.Context) (*raw.Client, error) {
 func (s stubDeps) GetRepoAccessCache(ctx context.Context) (*lockdown.RepoAccessCache, error) {
 	return s.repoAccessCache, nil
 }
-func (s stubDeps) GetT() translations.TranslationHelperFunc { return s.t }
-func (s stubDeps) GetFlags() FeatureFlags                   { return s.flags }
-func (s stubDeps) GetContentWindowSize() int                { return s.contentWindowSize }
+func (s stubDeps) GetT() translations.TranslationHelperFunc  { return s.t }
+func (s stubDeps) GetFlags(ctx context.Context) FeatureFlags { return s.flags }
+func (s stubDeps) GetContentWindowSize() int                 { return s.contentWindowSize }
 
 // Helper functions to create stub client functions for error testing
 func stubClientFnFromHTTP(httpClient *http.Client) func(context.Context) (*github.Client, error) {

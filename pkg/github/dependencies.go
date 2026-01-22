@@ -229,7 +229,6 @@ func NewRequestDeps(
 	lockdownMode bool,
 	repoAccessOpts []lockdown.RepoAccessOption,
 	t translations.TranslationHelperFunc,
-	flags FeatureFlags,
 	contentWindowSize int,
 ) *RequestDeps {
 	return &RequestDeps{
@@ -238,7 +237,6 @@ func NewRequestDeps(
 		lockdownMode:      lockdownMode,
 		RepoAccessOpts:    repoAccessOpts,
 		T:                 t,
-		Flags:             flags,
 		ContentWindowSize: contentWindowSize,
 	}
 }
