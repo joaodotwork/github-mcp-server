@@ -33,3 +33,19 @@ func GetToolset(ctx context.Context) string {
 	}
 	return ""
 }
+
+// lockdownCtxKey is a context key for lockdown mode
+type lockdownCtxKey struct{}
+
+// WithLockdownMode adds lockdown mode state to the context
+func WithLockdownMode(ctx context.Context, enabled bool) context.Context {
+	return context.WithValue(ctx, lockdownCtxKey{}, enabled)
+}
+
+// IsLockdownMode retrieves the lockdown mode state from the context
+func IsLockdownMode(ctx context.Context) bool {
+	if enabled, ok := ctx.Value(lockdownCtxKey{}).(bool); ok {
+		return enabled
+	}
+	return false
+}
