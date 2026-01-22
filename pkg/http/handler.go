@@ -105,6 +105,10 @@ func withToolset(next http.Handler) http.Handler {
 }
 
 func (h *HTTPMcpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if relaxedParseBool(r.Header.Get(headers.MCPLockdownHeader)) {
+		r = r.WithContext(ghcontext.WithLockdownMode(r.Context(), true))
+	}
+
 	inventory := h.inventoryFactoryFunc(r)
 
 	ghServer, err := h.githubMcpServerFactory(r.Context(), r, h.deps, inventory, &github.MCPServerConfig{
